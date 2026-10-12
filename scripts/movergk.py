@@ -240,8 +240,8 @@ class GlobalCoordinateController(Node):
         dy = self.target_y - self.current_y
         distance = math.sqrt(dx**2 + dy**2)
 
-        # Toleransi jarak menjadi 0.1 meter (10 cm)
-        if distance < 0.1:
+        # Toleransi jarak menjadi 0.05 meter (5 cm)
+        if distance < 0.05:
             self.stop_robot()
             self.is_moving = False
             
