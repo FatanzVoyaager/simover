@@ -157,7 +157,7 @@ from std_msgs.msg import Float64
 from nav_msgs.msg import Odometry
 import threading
 import math
-import time # Pastikan import time ada di atas
+import time
 
 class GlobalCoordinateController(Node):
     def __init__(self):
@@ -213,12 +213,8 @@ class GlobalCoordinateController(Node):
         
         while rclpy.ok():
             try:
-                # --- PERUBAHAN BARU ---
-                # Tahan prompt input CLI selama robot masih bergerak 
-                # agar teks terminal tidak saling timpa/berantakan
                 while self.is_moving:
                     time.sleep(0.5)
-                # ----------------------
 
                 print(f"\n[Posisi Saat Ini -> X: {self.current_x:.2f}, Y: {self.current_y:.2f}]")
                 print("--- Input Koordinat Global Target ---")
@@ -249,8 +245,6 @@ class GlobalCoordinateController(Node):
             self.stop_robot()
             self.is_moving = False
             
-            # --- PERUBAHAN BARU ---
-            # Cetak baris kosong agar status "Tercapai" tidak menimpa teks sebelumnya
             print() 
             self.get_logger().info('*** Target Koordinat Tercapai! ***\n')
             return
